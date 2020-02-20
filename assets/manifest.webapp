@@ -3,9 +3,9 @@
   "name": "tris-webpack-boilerplate",
   "description": "A Webpack boilerplate for static websites that has all the necessary modern tools and optimizations built-in. Score a perfect 10/10 on performance.",
   "icons": {
-    "60": "/assets/firefox_app_60x60.png",
-    "128": "/assets/firefox_app_128x128.png",
-    "512": "/assets/firefox_app_512x512.png"
+    "60": "./firefox_app_60x60.png",
+    "128": "./firefox_app_128x128.png",
+    "512": "./firefox_app_512x512.png"
   },
   "developer": {
     "name": "Tristan Michael Lawrence",
