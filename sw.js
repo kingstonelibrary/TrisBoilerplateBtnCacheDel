@@ -222,7 +222,28 @@ var __wpo = {
   pluginVersion: '5.0.7',
   relativePaths: true
 };
-
+self.addEventListener("fetch", function(event) {
+  console.log("[SW] fetch event (global scope fecth handler)");
+ });
+ 
+ self.addEventListener("push", function(event) {
+  if (Notification.permission == "granted") {
+    console.log("[SW] Push Notification Recieved", event);
+    event.waitUntil(
+      self.registration
+        .showNotification(event.data.json().notification.title, {
+          body: event.data.json().notification.body,
+          icon: event.data.json().notification.icon
+        })
+        .then(
+          function(showEvent) {},
+          function(error) {
+            console.log(error);
+          }
+        )
+    );
+  }
+ });
 !(function(e) {
   var n = {};
   function t(r) {
