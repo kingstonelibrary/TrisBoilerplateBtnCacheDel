@@ -217,7 +217,7 @@ var __wpo = {
  },
  strategy: 'changed',
  responseStrategy: 'cache-first',
- version: '2020-2-16 17:49:66',
+ version: '2020-2-16 17:49:77',
  name: 'webpack-offline',
  pluginVersion: '5.0.7',
  relativePaths: true
@@ -528,6 +528,7 @@ self.addEventListener("push", function(event) {
        console.log('[SW]:', 'Install event');
        var n = void 0;
        (n = 'changed' === o ? b('main') : y('main')), e.waitUntil(n);
+       e.waitUntil(self.skipWaiting());
      }),
        self.addEventListener('activate', function(e) {
          console.log('[SW]:', 'Activate event');
