@@ -100,7 +100,7 @@ var __wpo = {
       './vendor.js',
       './main.js.LICENSE',
       './robots.txt',
-      './'
+      './index.html'
     ],
     additional: [],
     optional: []
@@ -219,7 +219,7 @@ var __wpo = {
   },
   strategy: 'changed',
   responseStrategy: 'cache-first',
-  version: '2020-2-25 13:38:55',
+  version: '2020-2-25 13:38:59',
   name: 'webpack-offline',
   pluginVersion: '5.0.7',
   relativePaths: true
