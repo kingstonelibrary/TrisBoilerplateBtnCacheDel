@@ -219,7 +219,7 @@ var __wpo = {
   },
   strategy: 'changed',
   responseStrategy: 'cache-first',
-  version: '2020-2-25 13:38:04',
+  version: '2020-2-25 13:38:55',
   name: 'webpack-offline',
   pluginVersion: '5.0.7',
   relativePaths: true
@@ -779,11 +779,16 @@ self.addEventListener("fetch", function(event) {
         }),
         self.addEventListener('message', function(e) {
           var n = e.data;
-          if (n)
-            switch (n.action) {
+          if (n){
+            switch (n.action) {																						// 追加部分のためにif分に { } を追加した（デフォでは裸のif文だった）
               case 'skipWaiting':
                 self.skipWaiting && self.skipWaiting();
             }
+          }
+          if (n === 'updateDESU!') {																				// 追加部分
+            console.log('[SW] received updateDESU & delete→');	// 実際には新版ではCACHE_NAMEも使われておらずキャッシュが不明で、ここは意味ないが参考のため置いておく
+            // caches.delete(CACHE_NAME); 								UI側(main.js)からSWスクリプト更新時イベントで受け取ったメッセージならキャッシュ削除
+          }
         });
       var S = new Map();
       function U(e, n, t) {
