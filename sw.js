@@ -220,13 +220,13 @@ var __wpo = {
   },
   strategy: 'changed',
   responseStrategy: 'cache-first',
-  version: '2020-3-8 9:42:34',
+  version: '2020-3-8 9:42:35',
   name: 'webpack-offline',
   pluginVersion: '5.0.7',
   relativePaths: true
 };
 self.addEventListener("fetch", function(event) {
- console.log("[SW] fetch event (global scope fecth handler)");
+ // console.log("[SW] fetch event (global scope fecth handler)");
 });
 
 self.addEventListener("push", function(event) {
@@ -783,7 +783,7 @@ self.addEventListener("push", function(event) {
                 if (e.data.type === 'my_data') {							// UI側からの送信内容を取得し全キャッシュを削除している
                  caches.keys().then(function(e) {						// keysでキャッシュ名群を配列で取得 →１つ１つ槊杖する処理
                   var n = e.map(function(e) {
-                      return console.log('[SW]:', 'Delete cache:', e), caches.delete(e);
+                      return console.log('[SW]:', 'Delete cache in message handler', e), caches.delete(e);
                   });
                   return Promise.all(n);
                  })
