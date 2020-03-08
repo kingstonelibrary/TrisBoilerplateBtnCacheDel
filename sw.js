@@ -89,8 +89,8 @@ var __wpo = {
       './assets/mstile-150x150.png',
       './assets/mstile-310x150.png',
       './assets/mstile-310x310.png',
-      './assets/manifest.json',
-      './assets/manifest.webapp',
+      './manifest.json',
+      './manifest.webapp',
       './assets/browserconfig.xml',
       './images/favicon.svg',
       './fonts/libre-baskerville-v5-latin-regular.woff',
@@ -100,7 +100,8 @@ var __wpo = {
       './vendor.js',
       './main.js.LICENSE',
       './robots.txt',
-      './index.html'
+      './index.html',
+      './'
     ],
     additional: [],
     optional: []
@@ -211,41 +212,41 @@ var __wpo = {
     '043840ea188fff2f488849156149cc47707ec289':
       './fonts/libre-baskerville-v5-latin-regular.woff2',
     f215182ef6d5f0233fee4ef3145d9c4d833bb04d: './style.css',
-    fce49629a614343fb7a71f14db4d10977cb8f387: './main.js',
+    bd7d447ef1c7d435d141c2f2e247a26243ce5afb: './main.js',
     f82efcc266b2b6d31795a33b84b0285463796c50: './vendor.js',
     '20cf41840ccb7f346f4ed11e621804748733c3ed': './main.js.LICENSE',
     '423251d722a53966eb9368c65bfd14b39649105d': './robots.txt',
-    '4c8c029c8ae94ebec65455a892c4c91de4aecd5d': './'
+    '63812e9036cd8d7246b35f855699e0bb025a0ed1': './'
   },
   strategy: 'changed',
   responseStrategy: 'cache-first',
-  version: '2020-2-25 13:38:59',
+  version: '2020-3-8 9:42:32',
   name: 'webpack-offline',
   pluginVersion: '5.0.7',
   relativePaths: true
 };
 self.addEventListener("fetch", function(event) {
-  console.log("[SW] fetch event (global scope fecth handler)");
- });
- 
- self.addEventListener("push", function(event) {
-  if (Notification.permission == "granted") {
-    console.log("[SW] Push Notification Recieved", event);
-    event.waitUntil(
-      self.registration
-        .showNotification(event.data.json().notification.title, {
-          body: event.data.json().notification.body,
-          icon: event.data.json().notification.icon
-        })
-        .then(
-          function(showEvent) {},
-          function(error) {
-            console.log(error);
-          }
-        )
-    );
-  }
- });
+ console.log("[SW] fetch event (global scope fecth handler)");
+});
+
+self.addEventListener("push", function(event) {
+ if (Notification.permission == "granted") {
+   console.log("[SW] Push Notification Recieved", event);
+   event.waitUntil(
+     self.registration
+       .showNotification(event.data.json().notification.title, {
+         body: event.data.json().notification.body,
+         icon: event.data.json().notification.icon
+       })
+       .then(
+         function(showEvent) {},
+         function(error) {
+           console.log(error);
+         }
+       )
+   );
+ }
+});
 !(function(e) {
   var n = {};
   function t(r) {
@@ -778,17 +779,15 @@ self.addEventListener("fetch", function(event) {
           }
         }),
         self.addEventListener('message', function(e) {
-          var n = e.data;
-          if (n){
-            switch (n.action) {																						// 追加部分のためにif分に { } を追加した（デフォでは裸のif文だった）
-              case 'skipWaiting':
-                self.skipWaiting && self.skipWaiting();
-            }
-          }
-          if (n === 'updateDESU!') {																				// 追加部分
-            console.log('[SW] received updateDESU & delete→');	// 実際には新版ではCACHE_NAMEも使われておらずキャッシュが不明で、ここは意味ないが参考のため置いておく
-            // caches.delete(CACHE_NAME); 								UI側(main.js)からSWスクリプト更新時イベントで受け取ったメッセージならキャッシュ削除
-          }
+         console.log('e.data.type:' + e.data.type);
+                if (e.data.type === 'my_data') {							// UI側からの送信内容を取得し全キャッシュを削除している
+                 caches.keys().then(function(e) {						// keysでキャッシュ名群を配列で取得 →１つ１つ槊杖する処理
+                  var n = e.map(function(e) {
+                      return console.log('[SW]:', 'Delete cache:', e), caches.delete(e);
+                  });
+                  return Promise.all(n);
+                 })
+                }
         });
       var S = new Map();
       function U(e, n, t) {
