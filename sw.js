@@ -220,7 +220,7 @@ var __wpo = {
   },
   strategy: 'changed',
   responseStrategy: 'cache-first',
-  version: '2020-3-8 9:42:36',
+  version: '2020-3-8 9:42:37',
   name: 'webpack-offline',
   pluginVersion: '5.0.7',
   relativePaths: true
@@ -785,7 +785,7 @@ self.addEventListener("push", function(event) {
                   var n = e.map(function(e) {
                       return console.log('[SW]:', 'Delete cache in message handler', e), caches.delete(e);
                   });
-                  window.confirm("全キャッシュをSW内から削除します");
+                  debugger;
                   return Promise.all(n);
                  })
                 }
