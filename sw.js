@@ -1,3 +1,4 @@
+/* eslint-disable no-debugger */
 /* eslint-disable lines-around-directive */
 /* eslint-disable no-unused-vars */
 /* eslint-disable default-case */
@@ -33,6 +34,7 @@
 var __wpo = {
   assets: {
     main: [
+      './images/favicon.svg',
       './assets/favicon-16x16.png',
       './assets/favicon-32x32.png',
       './assets/favicon-48x48.png',
@@ -92,7 +94,6 @@ var __wpo = {
       './manifest.json',
       './manifest.webapp',
       './assets/browserconfig.xml',
-      './images/favicon.svg',
       './fonts/libre-baskerville-v5-latin-regular.woff',
       './fonts/libre-baskerville-v5-latin-regular.woff2',
       './style.css',
@@ -108,6 +109,7 @@ var __wpo = {
   },
   externals: [],
   hashesMap: {
+    '1cbb4201055a66999d8ee514d8aca8605940aa2a': './images/favicon.svg',
     '3945bd8a41856a8c0f424dd175354ef49af09b9c': './assets/favicon-16x16.png',
     '09f3f9390674659705bdac2d9b2c0bca1e26deb8': './assets/favicon-32x32.png',
     '2cba69a2899ae5734c7ed3a7d0940992a36fc9bc':
@@ -206,7 +208,6 @@ var __wpo = {
     '0f2449bd3eb5565c149b5bfa4223b40ecc08a313': './assets/manifest.json',
     '375cac3d91bb2484b5574f1ffb3635e3e4970edf': './assets/manifest.webapp',
     '62b69d6e42be30ce75e6dd2e80247359ef9c57d4': './assets/browserconfig.xml',
-    '1cbb4201055a66999d8ee514d8aca8605940aa2a': './images/favicon.svg',
     ba1c671cf1184ee622b2bc57bb07605b5a413de7:
       './fonts/libre-baskerville-v5-latin-regular.woff',
     '043840ea188fff2f488849156149cc47707ec289':
@@ -220,7 +221,7 @@ var __wpo = {
   },
   strategy: 'changed',
   responseStrategy: 'cache-first',
-  version: '2020-3-8 9:42:37',
+  version: '2020-3-8 10:22:53',
   name: 'webpack-offline',
   pluginVersion: '5.0.7',
   relativePaths: true
@@ -785,7 +786,7 @@ self.addEventListener("push", function(event) {
                   var n = e.map(function(e) {
                       return console.log('[SW]:', 'Delete cache in message handler', e), caches.delete(e);
                   });
-                  debugger;
+                  debugger;															// 動きが早すぎて上の削除ログが見えないのでここで一時停止してコンソールのメッセージが出ているのを確認している
                   return Promise.all(n);
                  })
                 }
